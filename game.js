@@ -1,64 +1,86 @@
 
 /**
- * Simple tic-tac-toe game example. 
+ * Simple FLAMES game example. 
  */
-const game = (function () {
+function changeBackground(selected){
+  var bac = document.getElementById("gameBody");
+  bac.style.backgroundColor = selected.value;
+  }
+  function CallFunction() {
+  
+      firstName = $("#firstName");
+      firstName = document.getElementById("firstName").value;
+      console.log(firstName);
+      secondName = document.getElementById("secondName").value;
+      if(firstName == "" || secondName == ""){
+        alert("Please enter correct name");
+      }
+      firstName = firstName.toLowerCase();
+      secondName = secondName.toLowerCase();
 
-    const cellElements = [
-      document.getElementById('upper-left'),
-      document.getElementById('upper-mid'),
-      document.getElementById('upper-right'),
-      document.getElementById('center-left'),
-      document.getElementById('center-mid'),
-      document.getElementById('center-right'),
-      document.getElementById('lower-left'),
-      document.getElementById('lower-mid'),
-      document.getElementById('lower-right')
-    ];
-    
-  
-    for (let i = 0; i < cellElements.length; i++) {
-      cellElements[i].addEventListener('click', async function () {
-  
-        // add player's X
-        const isValidMove = await addX(cellElements[i]);
-  
-        if (isValidMove) {
-  
-          // choose computer's O
-          const j = await findBestMove(cellElements);
-  
-          // pause, then add computer's O
-          await new Promise((resolve) => setTimeout(() => resolve(), 2000));
-          await addO(cellElements[j]);
-        }
-  
-      });
+      switch(GetFlameLetter(firstName, secondName)){
+        case "F":
+        alert("These persons are best friends");
+        break;
+        case "L":
+        alert("These persons love each other");
+        break;
+        case "A":
+        alert("These persons are affectionate to each other");
+        break;
+        case "M":
+        alert("These persons marry each other");
+        break;
+        case "E":
+        alert("These persons are arch enemies");
+        break;
+        case "S":
+        alert("These persons are siblings");
+        break;
+      }
+  }
+  function GetFlameLetter(firstName, secondName){
+    if (firstName.length < secondName.length){
+       temp = firstName;
+       var firstName = secondName;
+       var secondName = temp;
+
     }
-  
-    async function findBestMove(arr) {
-      for (let n = 0; n < arr.length; n++) {
-        if (arr[n].childElementCount === 0) {
-          return n;
+    var first = firstName;
+    var second = secondName;
+      for(i = 0; i < firstName.length; i++){
+        for(j=0; j < secondName.length; j++){
+          console.log(firstName+secondName)
+          if (firstName.charAt(i) == secondName.charAt(j)){
+            console.log(firstName.charAt(i));
+            var first = first.replace(firstName.charAt(i), "");
+            var second = second.replace(secondName.charAt(j), "");
+          }
         }
       }
-    }
+
+  console.log("initial"+first + second);
+  totalLength = (first + second).length;
+  console.log(totalLength);
+  var base = "FLAMES";
+  baseLength = base.length;
+  breakpoint = totalLength;
+  if (totalLength > baseLength){
+    breakpoint = totalLength % baseLength;
+  }
   
-    async function addX(cellElement) {
-      if (cellElement.childElementCount === 1) { return false; }
-      const headingElement = document.createElement("h1");
-      const textNode = document.createTextNode("X");
-      headingElement.appendChild(textNode);
-      cellElement.appendChild(headingElement);
-      return true;
+  console.log("testing point"+totalLength +" "+  breakpoint);
+  while(base.length != 1){
+    if (breakpoint > base.length){
+      console.log(breakpoint);
+      base = base.replace(base.charAt(totalLength % base.length-1), "");
+      continue;
     }
-  
-    async function addO(cellElement) {
-      if (cellElement.childElementCount === 1) { return; }
-      const headingElement = document.createElement("h1");
-      const textNode = document.createTextNode("O");
-      headingElement.appendChild(textNode);
-      cellElement.appendChild(headingElement);
-    }
-  
-  })();
+    
+    base = base.replace(base.charAt(breakpoint-1), "");
+    console.log(base); 
+  }
+  console.log("lastbase " + base);
+
+  return base;
+  }

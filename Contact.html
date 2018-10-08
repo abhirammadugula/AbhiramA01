@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="Contact.css">
 </head>
-    <body>
+    <body id="mainbody">
 
           <!-- BootStrap navbar menu changes with the screen size-->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -26,7 +26,7 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="About.html">Game</a></li>
+                    <li><a href="Game.html">Game</a></li>
                     <li><a href="Contact.html">Contact</a></li>
                 </ul>
             </div>
@@ -35,23 +35,28 @@
     <!-- A BootStrap container is used to adjust the layout of the contents based on screen size. .container uses pre-built screen sizes, while .container-fluid adjusts continously.-->
         
 <br><br><br>
-    <div id="stuform" >
-            <form>
-                First name:<br>
-                <input type="text" name="Enter the firstname"><br><br>
-                Last name:<br>
-                <input type="text" name="lastname" ><br><br>
-                Phone Number:<br>
-                <input type="text" name="contact number" ><br><br>
+            <form name="contact-form" align="center">
+                <div id="stuform" >
+                <label>First Name<br></label> 
+                <input type="text" name="firstName" id="firstName"/><br><br>
+                <label>Last Name:<br></label>
+                <input type="text" name="lastName" id="lastName"/><br><br>
+                <label>Email Id:<br></label>
+                <input type="email" name="emailId" id="emailId"/><br><br>
+                <label>Phone Number:<br> </label>
+                <input type="number" name="phoneNumber" id="phoneNumber" ><br><br>
+                <label>BackGround</label>
+                <select name="BackGround" id="background" onchange=changeBackground(this)>
+                    <option value="white">white</option>
+                    <option value="blue">blue</option>
+                    <option value="red">red</option>
+                    <option value="green">green</option><br>
+                </select>
                 <button onclick="CallFunction()">Submit</button>
               </form>
-
-              <script>
-                    function CallFunction() {
-                        alert("The details entered were registered");
-                    }
-            </script>
-    </div>
+            </div>
+              <script src="Contact.js"></script>
+   
     
     </body>
     </html>
